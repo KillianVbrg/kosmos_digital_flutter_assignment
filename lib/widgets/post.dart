@@ -1,5 +1,5 @@
 import 'package:assignment/constants/colors.dart';
-import 'package:assignment/screens/home/details.dart';
+import 'package:assignment/screens/feed/details.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _PostState extends State<Post> {
                 height: 450,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(widget.imagePath),
+                    image: NetworkImage(widget.imagePath),
                     fit: BoxFit.cover,
                   ),
                 ),

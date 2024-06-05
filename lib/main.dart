@@ -1,10 +1,12 @@
-import 'package:assignment/screens/home/feed.dart';
+import 'package:assignment/screens/feed/feed.dart';
 import 'package:assignment/screens/landing.dart';
+import 'package:assignment/services/firestore/post_store.dart';
 import 'package:assignment/theme.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,13 +16,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp (MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: "My assignment",
-    theme: primaryTheme,
-    home: Scaffold(
-      body: SafeArea(
-        child: Landing(),
+  runApp (ChangeNotifierProvider(
+    create: (context) => PostStore(),
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "My assignment",
+      theme: primaryTheme,
+      home: Scaffold(
+        body: SafeArea(
+          child: Landing(),
+        ),
       ),
     ),
   ));

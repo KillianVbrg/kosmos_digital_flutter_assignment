@@ -1,9 +1,11 @@
 import 'package:assignment/constants/colors.dart';
 import 'package:assignment/screens/posting/postImageSelector.dart';
 import 'package:assignment/screens/profile/profile_overview.dart';
+import 'package:assignment/services/firestore/post_store.dart';
 import 'package:assignment/widgets/post.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Feed extends StatefulWidget {
   const Feed({super.key});
@@ -19,6 +21,8 @@ class _FeedState extends State<Feed> {
 
   @override
   void initState() {
+    Provider.of<PostStore>(context, listen: false).fetchPosts();
+
     if(showSuccess){
       new Future.delayed(const Duration(seconds: 3), (){
         setState(() {
@@ -140,19 +144,15 @@ class _FeedState extends State<Feed> {
             Expanded(
               child: Stack(
                 children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Post(
-                          user: "Anna Clark",
-                          imagePath: "assets/picture_placeholder_1.png",
-                        ),
-                        Post(
-                          user: "Killian",
-                          imagePath: "assets/picture_placeholder_2.png",
-                        ),
-                      ],
-                    ),
+                  Consumer<PostStore>(
+                    builder: (context, value, child){
+                      return ListView.builder(
+                        itemCount: value.posts.length,
+                        itemBuilder: (_, index){
+                          return Post(user: value.posts[index].authorId, imagePath: value.posts[index].image);
+                        },
+                      );
+                    },
                   ),
                   Positioned.fill(
                     bottom: 10,

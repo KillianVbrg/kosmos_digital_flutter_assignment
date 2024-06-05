@@ -72,32 +72,33 @@ class _PostImageSelectorState extends State<PostImageSelector> {
                       ),
                     ),
                   ),
-                  Positioned.fill(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            selectedImage = null;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: Icon(
-                              Icons.delete_forever_rounded,
-                              size: 20,
-                              color: Colors.white,
+                  if(selectedImage != null)
+                    Positioned.fill(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              selectedImage = null;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Icon(
+                                Icons.delete_forever_rounded,
+                                size: 20,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -106,7 +107,7 @@ class _PostImageSelectorState extends State<PostImageSelector> {
             ),
             StyledButton(
               selectedImage == null ? null : () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PostDescriptionInput()))
+                Navigator.push(context, MaterialPageRoute(builder: (context) => PostDescriptionInput(selectedImage: selectedImage!,)))
               },
               StyledTitleSmall("Suivant"),
             ),
