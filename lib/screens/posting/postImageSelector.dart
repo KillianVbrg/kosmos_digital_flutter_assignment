@@ -23,11 +23,11 @@ class _PostImageSelectorState extends State<PostImageSelector> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
         child: Column(
           children: [
-            StyledHeadlineLarge(text: "Choisissez une image", centered: false),
-            SizedBox(
+            const StyledHeadlineLarge(text: "Choisissez une image", centered: false),
+            const SizedBox(
               height: 20,
             ),
             Expanded(
@@ -35,11 +35,11 @@ class _PostImageSelectorState extends State<PostImageSelector> {
                 children: [
                   DottedBorder(
                     strokeWidth: 1,
-                    dashPattern: [5,5],
+                    dashPattern: const [5,5],
                     borderType: BorderType.RRect,
-                    radius: Radius.circular(15),
+                    radius: const Radius.circular(15),
                     child: selectedImage != null ?
-                    Container(
+                    SizedBox(
                       height: double.infinity,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
@@ -59,14 +59,14 @@ class _PostImageSelectorState extends State<PostImageSelector> {
                           selectedImage = File(returnedImage.path);
                         });
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.cloud_upload, color: AppColors.textMuted,),
-                            StyledHeadlineSmall(text: "Appuyez pour choisir une photo", centered: true)
+                            const StyledHeadlineSmall(text: "Appuyez pour choisir une photo", centered: true)
                           ],
                         ),
                       ),
@@ -83,12 +83,12 @@ class _PostImageSelectorState extends State<PostImageSelector> {
                             });
                           },
                           child: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.red,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
+                            child: const Padding(
+                              padding: EdgeInsets.all(5),
                               child: Icon(
                                 Icons.delete_forever_rounded,
                                 size: 20,
@@ -102,14 +102,14 @@ class _PostImageSelectorState extends State<PostImageSelector> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             StyledButton(
               selectedImage == null ? null : () => {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => PostDescriptionInput(selectedImage: selectedImage!,)))
               },
-              StyledTitleSmall("Suivant"),
+              const StyledTitleSmall("Suivant"),
             ),
           ],
         ),

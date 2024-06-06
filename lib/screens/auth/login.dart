@@ -1,11 +1,12 @@
 import 'package:assignment/constants/colors.dart';
 import 'package:assignment/screens/feed/feed.dart';
 import 'package:assignment/services/auth/auth_service.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/text_field.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -35,14 +36,14 @@ class _LoginState extends State<Login> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        child: Padding(padding: EdgeInsets.all(30),
+        child: Padding(padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              StyledHeadlineLargest(text: "Connectez-vous à votre compte", centered: true,),
-              SizedBox(
+              const StyledHeadlineLargest(text: "Connectez-vous à votre compte", centered: true,),
+              const SizedBox(
                 height: 60,
               ),
               Column(
@@ -54,7 +55,7 @@ class _LoginState extends State<Login> {
                     isHidden: false,
                     controller: emailController,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   StyledTextField(
@@ -67,27 +68,27 @@ class _LoginState extends State<Login> {
                           isHidden = !isHidden;
                         });
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.remove_red_eye
                       ),
                     ),
                     controller: passwordController,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      StyledBodySmall("Mot de passe oublié ?"),
-                      SizedBox(
+                      const StyledBodySmall("Mot de passe oublié ?"),
+                      const SizedBox(
                         width: 5,
                       ),
                       GestureDetector(
                         onTap: (){
                           showModalBottomSheet(
                             context: context,
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(top: Radius.circular(30),
                               ),
                             ),
@@ -95,17 +96,17 @@ class _LoginState extends State<Login> {
 
                             backgroundColor: Colors.white,
                             builder: (context) => Container(
-                              padding: EdgeInsets.all(25),
+                              padding: const EdgeInsets.all(25),
                               width: double.infinity,
                               height: 400,
                               child: Column(
                                 children: [
-                                  StyledHeadlineMedium("Réinitialiser mot de passe"),
-                                  SizedBox(
+                                  const StyledHeadlineMedium("Réinitialiser mot de passe"),
+                                  const SizedBox(
                                     height: 10,
                                   ),
-                                  StyledHeadlineSmall(text: "Entrez l’adresse email associée à votre compte. Nous vous enverrons un email de réinitialisation sur celle-ci.", centered: true,),
-                                  SizedBox(
+                                  const StyledHeadlineSmall(text: "Entrez l’adresse email associée à votre compte. Nous vous enverrons un email de réinitialisation sur celle-ci.", centered: true,),
+                                  const SizedBox(
                                     height: 30,
                                   ),
                                   Column(
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
                                         isHidden: false,
                                         controller: emailResetPasswordController,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       StyledButton(
@@ -135,29 +136,29 @@ class _LoginState extends State<Login> {
                                                       onPressed: (){
                                                         Navigator.pop(context);
                                                       },
-                                                      icon: Icon(
+                                                      icon: const Icon(
                                                         Icons.close,
                                                         color: Colors.grey,
                                                         ),
                                                       ),
                                                     ),
-                                                    StyledHeadlineLarge(text: "Vérifiez votre boîte mail", centered: true,)
+                                                    const StyledHeadlineLarge(text: "Vérifiez votre boîte mail", centered: true,)
                                                   ],
                                                 ),
-                                                content: StyledHeadlineSmall(text: "Vous avez reçu un mail afin de réinitialiser votre mot de passe.", centered: true,),
+                                                content: const StyledHeadlineSmall(text: "Vous avez reçu un mail afin de réinitialiser votre mot de passe.", centered: true,),
                                                 actions: [
                                                   StyledButton(
                                                     () {
                                                       return Navigator.pop(context);
                                                     },
-                                                    StyledTitleSmall("Fermer"),
+                                                    const StyledTitleSmall("Fermer"),
                                                   ),
                                                 ],
                                               );
                                             },
                                           ),
                                         },
-                                        StyledTitleSmall("Réinitialiser"),
+                                        const StyledTitleSmall("Réinitialiser"),
                                       ),
                                     ],
                                   )
@@ -178,15 +179,15 @@ class _LoginState extends State<Login> {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   if(_errorFeedback != null)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(_errorFeedback!, style: TextStyle(color: Colors.red),),
-                        SizedBox(
+                        Text(_errorFeedback!, style: const TextStyle(color: Colors.red),),
+                        const SizedBox(
                           height: 5,
                           width: double.infinity,
                         ),
@@ -213,7 +214,8 @@ class _LoginState extends State<Login> {
                             _errorFeedback = "L'adresse mail ou le mot de passe est incorrect";
                           });
                         } else {
-                          Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => Feed()), (route) => false);
+                          Provider.of<UserInfoStore>(context, listen: false).fetchUserInfo(user.uid);
+                          Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => const Feed()), (route) => false);
                         }
                       } else {
                         setState(() {
@@ -221,7 +223,7 @@ class _LoginState extends State<Login> {
                         });
                       }
                     },
-                    StyledTitleSmall("Connexion"),
+                    const StyledTitleSmall("Connexion"),
                   ),
                 ],
               ),

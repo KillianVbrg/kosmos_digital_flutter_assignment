@@ -23,12 +23,12 @@ class _ProfileTileState extends State<ProfileTile> {
       child: GestureDetector(
         onTap: widget.redirect,
         child: Container(
-          padding: EdgeInsets.only(left: 15, right: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15),
           height: 60,
 
           decoration: BoxDecoration(
             color: Colors.grey[200],
-            borderRadius: BorderRadius.all(Radius.circular(10))
+            borderRadius: const BorderRadius.all(Radius.circular(10))
           ),
           child: Row(
             children: [
@@ -42,7 +42,7 @@ class _ProfileTileState extends State<ProfileTile> {
                     ),
                     child: widget.prefix is String ? CircleAvatar(backgroundImage: AssetImage(widget.prefix),) : Icon(widget.prefix, color: Colors.white, size: 20,)
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Column(
@@ -54,7 +54,7 @@ class _ProfileTileState extends State<ProfileTile> {
                       StyledBodySmall(widget.subText!)
                   ],
                 ),
-                Expanded(
+                const Expanded(
                   child: SizedBox(),
                 ),
                 widget.suffix,

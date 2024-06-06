@@ -30,18 +30,18 @@ class _ProfileOverviewState extends State<ProfileOverview> {
       appBar: AppBar(
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20),
             child: GestureDetector(
               onTap: (){
                 showCupertinoModalPopup(context: context, builder: (context) {
                   return CupertinoActionSheet(
-                    title: StyledBodySmall("Que souhaitez vous faire ?"),
+                    title: const StyledBodySmall("Que souhaitez vous faire ?"),
                     actions: [
                       CupertinoActionSheetAction(
                         onPressed: (){
                           AuthService.signOut();
                         },
-                        child: Text("Se déconnecter", style: TextStyle(color: Colors.red),),
+                        child: const Text("Se déconnecter", style: TextStyle(color: Colors.red),),
                       ),
                       CupertinoActionSheetAction(
                         onPressed: () => {
@@ -58,16 +58,16 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                       onPressed: (){
                                         Navigator.pop(context);
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.close,
                                         color: Colors.grey,
                                       ),
                                     ),
                                   ),
-                                  StyledHeadlineLarge(text: "Supprimer mon compte", centered: true,)
+                                  const StyledHeadlineLarge(text: "Supprimer mon compte", centered: true,)
                                 ],
                               ),
-                                content: StyledHeadlineSmall(
+                                content: const StyledHeadlineSmall(
                                   text: "Souhaitez-vous vraiment supprimer votre compte ?",
                                   centered: true,
                                 ),
@@ -76,7 +76,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                         () {
                                       return Navigator.pop(context);
                                     },
-                                    StyledTitleSmall("Oui"),
+                                    const StyledTitleSmall("Oui"),
                                   ),
                                   Align(
                                     alignment: Alignment.center,
@@ -84,7 +84,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                         onPressed: () {
                                         return Navigator.pop(context);
                                       },
-                                      child: StyledHeadlineMedium("Non"),
+                                      child: const StyledHeadlineMedium("Non"),
                                     ),
                                   ),
                                 ],
@@ -92,27 +92,27 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                             },
                           ),
                         },
-                        child: Text("Supprimer mon profil", style: TextStyle(color: Colors.red),),
+                        child: const Text("Supprimer mon profil", style: TextStyle(color: Colors.red),),
                       ),
                       Container(
                         color: Colors.white,
                         child: CupertinoActionSheetAction(
                           onPressed: (){},
-                          child: Text("Annuler", style: TextStyle(color: Colors.blue),),
                           isDestructiveAction: true,
+                          child: const Text("Annuler", style: TextStyle(color: Colors.blue),),
                         ),
                       ),
                     ],
                   );
                 });
               },
-              child: Icon(Icons.more_horiz_rounded),
+              child: const Icon(Icons.more_horiz_rounded),
             )
           ),
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -123,12 +123,12 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       Container(
                         height: 100,
                         width: 100,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(image: AssetImage("assets/profile_placeholder_2.png"), fit: BoxFit.fill)
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -140,7 +140,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                         onTap: (){
                           showCupertinoModalPopup(context: context, builder: (context) {
                             return CupertinoActionSheet(
-                              title: StyledBodySmall("Que souhaitez vous faire ?"),
+                              title: const StyledBodySmall("Que souhaitez vous faire ?"),
                               actions: [
                                 CupertinoActionSheetAction(
                                   onPressed: () async {
@@ -153,7 +153,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                       selectedImage = File(returnedImage.path);
                                     });
                                   },
-                                  child: Text("Prendre une photo/vidéo", style: TextStyle(color: Colors.blue),),
+                                  child: const Text("Prendre une photo/vidéo", style: TextStyle(color: Colors.blue),),
                                 ),
                                 CupertinoActionSheetAction(
                                   onPressed: () async {
@@ -166,14 +166,14 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                                       selectedImage = File(returnedImage.path);
                                     });
                                   },
-                                  child: Text("Bibliothèque photos/vidéos", style: TextStyle(color: Colors.blue),),
+                                  child: const Text("Bibliothèque photos/vidéos", style: TextStyle(color: Colors.blue),),
                                 ),
                                 Container(
                                   color: Colors.white,
                                   child: CupertinoActionSheetAction(
                                     onPressed: (){},
-                                    child: Text("Annuler", style: TextStyle(color: Colors.blue),),
                                     isDestructiveAction: true,
+                                    child: const Text("Annuler", style: TextStyle(color: Colors.blue),),
                                   ),
                                 ),
                               ],
@@ -185,8 +185,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                             shape: BoxShape.circle,
                             color: AppColors.primaryColor.withOpacity(0.5),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5),
+                          child: const Padding(
+                            padding: EdgeInsets.all(5),
                             child: Icon(
                               Icons.edit,
                               size: 20,
@@ -199,24 +199,24 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   ),
                 ]
               ),
-              StyledHeadlineLarge(text: "Anna Clark", centered: true),
-              StyledHeadlineSmall(text: "emial@gmail.com", centered: true),
+              const StyledHeadlineLarge(text: "Anna Clark", centered: true),
+              const StyledHeadlineSmall(text: "emial@gmail.com", centered: true),
               Divider(color: Colors.grey[300]),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
           
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StyledHeadlineMedium("Mon compte"),
+                  const StyledHeadlineMedium("Mon compte"),
                   ProfileTile(
                     prefix: "assets/profile_placeholder_2.png",
                     text: "Anna Clark",
                     subText: "email@gamil.co",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileModifyInfo()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileModifyInfo()));
                     },
                   ),
                   ProfileTile(
@@ -225,12 +225,12 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     subText: "Mot de passe, mail, ...",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSecurity()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSecurity()));
                     },
                   ),
           
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
                     child: StyledHeadlineMedium("Paramètres"),
                   ),
                   ProfileTile(
@@ -249,8 +249,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     redirect: (){},
                   ),
           
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
                     child: StyledHeadlineMedium("Autres"),
                   ),
                   ProfileTile(
@@ -259,7 +259,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     subText: "Contactez-nous en partageant l'app",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
                   ProfileTile(
@@ -268,45 +268,45 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     subText: "Soutenez-nous en partageant l'app",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
           
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
                     child: StyledHeadlineMedium("Liens"),
                   ),
                   ProfileTile(
                     text: "Politique de confidentialité",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
                   ProfileTile(
                     text: "Conditions générales de ventes et\nd'utilisation",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
                   ProfileTile(
                     text: "Mentions légales",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
                   ProfileTile(
                     text: "À propos",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceholderScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
                     },
                   ),
           
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 10),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
                     child: StyledHeadlineMedium("Réseaux sociaux"),
                   ),
                   ProfileTile(
@@ -345,13 +345,13 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       await launchUrl(url);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                           "Édité par "
                       ),
                       GestureDetector(
@@ -359,7 +359,7 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                           final url = Uri.parse("https://www.kosmos-digital.com");
                           await launchUrl(url);
                         },
-                        child: Text(
+                        child: const Text(
                           "kosmos-digital.com",
                           style: TextStyle(
                             decoration: TextDecoration.underline

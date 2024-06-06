@@ -21,11 +21,11 @@ class _ProfileSecurityPasswordState extends State<ProfileSecurityPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StyledHeadlineMedium("Adresse mail"),
+        title: const StyledHeadlineMedium("Adresse mail"),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
           children: [
             StyledTextField(
@@ -38,13 +38,13 @@ class _ProfileSecurityPasswordState extends State<ProfileSecurityPassword> {
                     isHidden = !isHidden;
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                     Icons.remove_red_eye
                 ),
               ),
               controller: currentPasswordController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             StyledTextField(
@@ -57,13 +57,13 @@ class _ProfileSecurityPasswordState extends State<ProfileSecurityPassword> {
                     isHidden = !isHidden;
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                     Icons.remove_red_eye
                 ),
               ),
               controller: newPasswordController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             StyledTextField(
@@ -76,13 +76,13 @@ class _ProfileSecurityPasswordState extends State<ProfileSecurityPassword> {
                     isHidden = !isHidden;
                   });
                 },
-                icon: Icon(
+                icon: const Icon(
                     Icons.remove_red_eye
                 ),
               ),
               controller: newPasswordConfirmationController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             StyledButton(
@@ -100,37 +100,37 @@ class _ProfileSecurityPasswordState extends State<ProfileSecurityPassword> {
                               onPressed: (){
                                 Navigator.pop(context);
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.close,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
-                          StyledHeadlineLarge(text: "Vérifiez votre boite mail", centered: true,)
+                          const StyledHeadlineLarge(text: "Vérifiez votre boite mail", centered: true,)
                         ],
                       ),
-                      content: StyledHeadlineSmall(text: "Vos nouveaux identifiants vous ont été envoyés par mail !", centered: true,),
+                      content: const StyledHeadlineSmall(text: "Vos nouveaux identifiants vous ont été envoyés par mail !", centered: true,),
                       actions: [
                         StyledButton(
                               () {
                             return Navigator.pop(context);
                           },
-                          StyledTitleSmall("Fermer"),
+                          const StyledTitleSmall("Fermer"),
                         ),
                       ],
                     );
                   },
                 );
               },
-              StyledTitleSmall("Modifier") ,
+              const StyledTitleSmall("Modifier") ,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
+            const StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
           ],
         ),
       ),
-    );;;
+    );
   }
 }

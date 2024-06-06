@@ -1,20 +1,31 @@
 import 'package:assignment/constants/colors.dart';
 import 'package:assignment/screens/feed/details.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 
 class Post extends StatefulWidget {
-  const Post({required this.user, required this.imagePath, super.key});
+  const Post({required this.date, required this.imagePath, required this.description, super.key});
 
-  final String user;
+  final DateTime date;
   final String imagePath;
-
+  final String description;
   @override
   State<Post> createState() => _PostState();
 }
 
 class _PostState extends State<Post> {
+  var timeAgo;
+  @override
+  void initState() {
+    timeAgo = timeago.format(widget.date);
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,7 +35,7 @@ class _PostState extends State<Post> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Details(
+                builder: (context) => const Details(
                   user: "Killian",
                   imagePath: "assets/picture_placeholder_2.png",
                 ),
@@ -51,22 +62,22 @@ class _PostState extends State<Post> {
                         onTap: (){
                           showCupertinoModalPopup(context: context, builder: (context) {
                             return CupertinoActionSheet(
-                              title: StyledBodySmall("Que souhaitez vous faire ?"),
+                              title: const StyledBodySmall("Que souhaitez vous faire ?"),
                               actions: [
                                 CupertinoActionSheetAction(
                                   onPressed: (){},
-                                  child: Text("Signalez cette publication", style: TextStyle(color: Colors.red),),
+                                  child: const Text("Signalez cette publication", style: TextStyle(color: Colors.red),),
                                 ),
                                 CupertinoActionSheetAction(
                                   onPressed: (){},
-                                  child: Text("Supprimer la publication", style: TextStyle(color: Colors.red),),
+                                  child: const Text("Supprimer la publication", style: TextStyle(color: Colors.red),),
                                 ),
                                 Container(
                                   color: Colors.white,
                                   child: CupertinoActionSheetAction(
                                     onPressed: (){},
-                                    child: Text("Close", style: TextStyle(color: Colors.blue),),
                                     isDestructiveAction: true,
+                                    child: const Text("Close", style: TextStyle(color: Colors.blue),),
                                   ),
                                 ),
                               ],
@@ -74,8 +85,8 @@ class _PostState extends State<Post> {
                           });
                         },
                         child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8),
                             child: Icon(
                               Icons.more_vert_rounded,
                               color: Colors.white,
@@ -95,9 +106,9 @@ class _PostState extends State<Post> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             CircleAvatar(
-                              backgroundImage: AssetImage("assets/profile_placeholder_1.png"),
+                              backgroundImage: NetworkImage(Provider.of<UserInfoStore>(context).userInfo[0].image),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                             Column(
@@ -106,14 +117,18 @@ class _PostState extends State<Post> {
                               children: [
                                 Row(
                                   children: [
-                                    StyledTitleSmall("User's name"),
-                                    SizedBox(
+                                    StyledTitleSmall(Provider.of<UserInfoStore>(context).userInfo[0].firstName),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    StyledTitleSmall(Provider.of<UserInfoStore>(context).userInfo[0].lastName),
+                                    const SizedBox(
                                       width: 10,
                                     ),
-                                    StyledBodySmall("22 min"),
+                                    StyledBodySmall("$timeAgo"),
                                   ],
                                 ),
-                                StyledBodySmall("Post description")
+                                StyledBodySmall(widget.description)
                               ],
                             ),
                           ],
@@ -126,7 +141,7 @@ class _PostState extends State<Post> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

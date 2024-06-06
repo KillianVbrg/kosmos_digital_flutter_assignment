@@ -13,13 +13,13 @@ class StyledButton extends StatelessWidget {
       onPressed: onPressed,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 15,
         ),
         decoration: BoxDecoration(
           color: onPressed == null ? AppColors.primaryColor.withOpacity(0.2) : AppColors.primaryColor,
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(5),
           ),
         ),

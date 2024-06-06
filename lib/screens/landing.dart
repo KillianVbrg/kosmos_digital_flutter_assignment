@@ -20,19 +20,19 @@ class Landing extends StatelessWidget {
             Column(
               children: [
                 StyledButton(
-                  () => {Navigator.push(context, MaterialPageRoute(builder: (ctx) => Login() ))},
-                  StyledTitleSmall("Connexion"),
+                  () => {Navigator.push(context, MaterialPageRoute(builder: (ctx) => const Login() ))},
+                  const StyledTitleSmall("Connexion"),
                 ),
                 StyledButton(
                   () => {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Register(),
+                        builder: (context) => const Register(),
                       ),
                     ),
                   },
-                  StyledTitleSmall("Inscription"),
+                  const StyledTitleSmall("Inscription"),
                 ),
               ],
             ),

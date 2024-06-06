@@ -17,7 +17,7 @@ class StyledTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         StyledBodyMedium(text: label, centered: false),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Container(
@@ -26,7 +26,7 @@ class StyledTextField extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 5,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ]
           ),

@@ -49,8 +49,8 @@ class _DetailsState extends State<Details> {
                               color: AppColors.primaryColor.withOpacity(0.25),
                               shape: BoxShape.circle,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8),
                               child: Icon(
                                 Icons.arrow_back,
                                 color: Colors.white,
@@ -62,22 +62,22 @@ class _DetailsState extends State<Details> {
                           onTap: (){
                             showCupertinoModalPopup(context: context, builder: (context) {
                               return CupertinoActionSheet(
-                                title: StyledBodySmall("Que souhaitez vous faire ?"),
+                                title: const StyledBodySmall("Que souhaitez vous faire ?"),
                                 actions: [
                                   CupertinoActionSheetAction(
                                     onPressed: (){},
-                                    child: Text("Signalez cette publication", style: TextStyle(color: Colors.red),),
+                                    child: const Text("Signalez cette publication", style: TextStyle(color: Colors.red),),
                                   ),
                                   CupertinoActionSheetAction(
                                     onPressed: (){},
-                                    child: Text("Supprimer la publication", style: TextStyle(color: Colors.red),),
+                                    child: const Text("Supprimer la publication", style: TextStyle(color: Colors.red),),
                                   ),
                                   Container(
                                     color: Colors.white,
                                     child: CupertinoActionSheetAction(
                                       onPressed: (){},
-                                      child: Text("Close", style: TextStyle(color: Colors.blue),),
                                       isDestructiveAction: true,
+                                      child: const Text("Close", style: TextStyle(color: Colors.blue),),
                                     ),
                                   ),
                                 ],
@@ -89,8 +89,8 @@ class _DetailsState extends State<Details> {
                               color: AppColors.primaryColor.withOpacity(0.25),
                               shape: BoxShape.circle,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8),
                               child: Icon(
                                 Icons.more_vert_rounded,
                                 color: Colors.white,
@@ -107,8 +107,8 @@ class _DetailsState extends State<Details> {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [AppColors.primaryColor.withOpacity(0.75), Colors.transparent], begin: Alignment.centerRight, end: Alignment.centerLeft)
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(30),
+                  child: const Padding(
+                    padding: EdgeInsets.all(30),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [

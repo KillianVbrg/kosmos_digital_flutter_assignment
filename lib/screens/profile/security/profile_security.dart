@@ -11,7 +11,7 @@ class ProfileSecurity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StyledHeadlineMedium("Sécurité"),
+        title: const StyledHeadlineMedium("Sécurité"),
         centerTitle: true,
       ),
       body: Padding(
@@ -23,7 +23,7 @@ class ProfileSecurity extends StatelessWidget {
                 subText: "email@gmail.com",
                 suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                 redirect: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSecurityEmail()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSecurityEmail()));
                 }
             ),
             ProfileTile(
@@ -31,12 +31,12 @@ class ProfileSecurity extends StatelessWidget {
                 subText: "Dernière modification: il y a 3j",
                 suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                 redirect: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileSecurityPassword()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileSecurityPassword()));
                 }
             ),
           ],
         ),
       ),
-    );;
+    );
   }
 }

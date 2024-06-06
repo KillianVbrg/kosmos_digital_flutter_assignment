@@ -1,6 +1,5 @@
-import 'package:assignment/screens/feed/feed.dart';
-import 'package:assignment/screens/landing.dart';
 import 'package:assignment/services/firestore/post_store.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/theme.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/texts.dart';
@@ -19,13 +18,16 @@ void main() async {
 
   runApp (ChangeNotifierProvider(
     create: (context) => PostStore(),
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "My assignment",
-      theme: primaryTheme,
-      home: Scaffold(
-        body: SafeArea(
-          child: Wrapper(),
+    child: ChangeNotifierProvider(
+      create: (context) => UserInfoStore(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "My assignment",
+        theme: primaryTheme,
+        home: const Scaffold(
+          body: SafeArea(
+            child: Wrapper(),
+          ),
         ),
       ),
     ),
@@ -39,26 +41,26 @@ class Sandbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Test"),
+        title: const Text("Test"),
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
 
         color: Colors.grey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            StyledBodySmall("Small body"),
-            StyledBodyMedium(text: "Medium body", centered: true,),
-            StyledHeadlineSmall(text: "Small headline", centered: true,),
-            StyledHeadlineMedium("Medium headline"),
-            StyledHeadlineLarge(text: "Large headline", centered: true,),
-            StyledTitleSmall("Small title"),
-            StyledTitleMedium("Medium title"),
-            StyledTitleLarge("Large title"),
+            const StyledBodySmall("Small body"),
+            const StyledBodyMedium(text: "Medium body", centered: true,),
+            const StyledHeadlineSmall(text: "Small headline", centered: true,),
+            const StyledHeadlineMedium("Medium headline"),
+            const StyledHeadlineLarge(text: "Large headline", centered: true,),
+            const StyledTitleSmall("Small title"),
+            const StyledTitleMedium("Medium title"),
+            const StyledTitleLarge("Large title"),
             StyledButton(
                   () {},
-              StyledTitleSmall("Test"),
+              const StyledTitleSmall("Test"),
             ),
           ],
         ),

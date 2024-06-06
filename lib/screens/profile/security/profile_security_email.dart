@@ -17,11 +17,11 @@ class _ProfileSecurityEmailState extends State<ProfileSecurityEmail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StyledHeadlineMedium("Adresse mail"),
+        title: const StyledHeadlineMedium("Adresse mail"),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
           children: [
             StyledTextField(
@@ -30,7 +30,7 @@ class _ProfileSecurityEmailState extends State<ProfileSecurityEmail> {
               isHidden: false,
               controller: emailController,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             StyledButton(
@@ -48,34 +48,34 @@ class _ProfileSecurityEmailState extends State<ProfileSecurityEmail> {
                               onPressed: (){
                                 Navigator.pop(context);
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.close,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
-                          StyledHeadlineLarge(text: "Confirmez votre adresse mail", centered: true,)
+                          const StyledHeadlineLarge(text: "Confirmez votre adresse mail", centered: true,)
                         ],
                       ),
-                      content: StyledHeadlineSmall(text: "Vous venez de recevoir un mail de vérification sur john******com.", centered: true,),
+                      content: const StyledHeadlineSmall(text: "Vous venez de recevoir un mail de vérification sur john******com.", centered: true,),
                       actions: [
                         StyledButton(
                               () {
                             return Navigator.pop(context);
                           },
-                          StyledTitleSmall("Fermer"),
+                          const StyledTitleSmall("Fermer"),
                         ),
                       ],
                     );
                   },
                 );
               },
-              StyledTitleSmall("Modifier") ,
+              const StyledTitleSmall("Modifier") ,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
+            const StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
           ],
         ),
       ),

@@ -5,7 +5,7 @@ ThemeData primaryTheme = ThemeData(
   // seed
   colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
 
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     surfaceTintColor: Colors.transparent,
   ),
 
@@ -39,12 +39,12 @@ ThemeData primaryTheme = ThemeData(
       fontSize: 34,
       fontWeight: FontWeight.w900,
     ),
-    titleSmall: TextStyle(
+    titleSmall: const TextStyle(
         color: Colors.white,
         fontSize: 16,
         fontWeight: FontWeight.w400,
     ),
-    titleMedium: TextStyle(
+    titleMedium: const TextStyle(
         color: Colors.white,
         fontSize: 18,
         fontWeight: FontWeight.w400
@@ -60,13 +60,13 @@ ThemeData primaryTheme = ThemeData(
     filled: true,
     fillColor: Colors.grey[200],
     enabledBorder: OutlineInputBorder(borderRadius:BorderRadius.circular(7),
-    borderSide: BorderSide(color: Colors.transparent)),
-    contentPadding: EdgeInsets.all(15),
+    borderSide: const BorderSide(color: Colors.transparent)),
+    contentPadding: const EdgeInsets.all(15),
     suffixIconColor: Colors.grey,
   ),
 
 
-  dialogTheme: DialogTheme(
+  dialogTheme: const DialogTheme(
     surfaceTintColor: Colors.transparent
   ),
 );

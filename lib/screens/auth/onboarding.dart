@@ -1,11 +1,20 @@
 import 'dart:io';
 
 import 'package:assignment/constants/colors.dart';
+import 'package:assignment/models/user_info.dart' as UserInfoModel; // sinon collision avec UserInfo the Firebase Auth
+import 'package:assignment/screens/feed/feed.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/text_field.dart';
 import 'package:assignment/widgets/texts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -29,11 +38,11 @@ class _OnboardingState extends State<Onboarding> {
           padding: const EdgeInsets.all(30),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              StyledHeadlineLargest(text: "Créez votre profil", centered: true),
-              SizedBox(
+              const StyledHeadlineLargest(text: "Créez votre profil", centered: true),
+              const SizedBox(
                 height: 60,
               ),
               Column(
@@ -45,7 +54,7 @@ class _OnboardingState extends State<Onboarding> {
                     isHidden: false,
                     controller: lastNameController,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   StyledTextField(
@@ -54,11 +63,11 @@ class _OnboardingState extends State<Onboarding> {
                     isHidden: false,
                     controller: firstNameController,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  StyledBodyMedium(text: "Photo de profil*", centered: true,),
-                  SizedBox(
+                  const StyledBodyMedium(text: "Photo de profil*", centered: true,),
+                  const SizedBox(
                     height: 5,
                   ),
                   GestureDetector(
@@ -67,7 +76,7 @@ class _OnboardingState extends State<Onboarding> {
 
                       if(returnedImage == null) return;
                       setState(() {
-                        selectedImage = File(returnedImage!.path);
+                        selectedImage = File(returnedImage.path);
                       });
                     },
                     child: Container(
@@ -76,7 +85,7 @@ class _OnboardingState extends State<Onboarding> {
                             BoxShadow(
                             color: Colors.black.withOpacity(0.1),
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -89,23 +98,49 @@ class _OnboardingState extends State<Onboarding> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.cloud_upload, color: AppColors.textMuted,),
-                            StyledHeadlineSmall(text: "Appuyez pour choisir une photo", centered: true)
+                            const StyledHeadlineSmall(text: "Appuyez pour choisir une photo", centered: true)
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   StyledButton(
-                    () => {},
-                    StyledTitleSmall("Terminer l'inscription"),
+                    () async {
+                      // store the image
+                      var imageUrl;
+                      final Reference reference = FirebaseStorage.instance.ref().child("posts_images/${uuid.v4()}");
+                      try{
+                        await reference.putFile(File(selectedImage!.path));
+
+                        imageUrl = await reference.getDownloadURL();
+                      } catch(error){
+                        print(error);
+                      }
+
+
+                      final userId = await FirebaseAuth.instance.currentUser!.uid;
+                      final userInfoId = Provider.of<UserInfoStore>(context, listen: false).userInfo[0].id;
+                      Provider.of<UserInfoStore>(context, listen: false).updateUserInfo(UserInfoModel.UserInfo(
+                          id: userInfoId,
+                          userId: userId,
+                          firstName: firstNameController.text.trim(),
+                          lastName: lastNameController.text.trim(),
+                          image: imageUrl,
+                          datePasswordUpdate: Provider.of<UserInfoStore>(context, listen: false).userInfo[0].datePasswordUpdate,
+                          notification: Provider.of<UserInfoStore>(context, listen: false).userInfo[0].notification
+                      ));
+
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Feed()), (route) => false);
+                    },
+                    const StyledTitleSmall("Terminer l'inscription"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
+                  const StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
                 ],
               ),
             ],

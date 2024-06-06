@@ -10,7 +10,7 @@ class ProfileModifyInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StyledHeadlineMedium("Modifier"),
+        title: const StyledHeadlineMedium("Modifier"),
         centerTitle: true,
       ),
       body: Padding(
@@ -20,7 +20,7 @@ class ProfileModifyInfo extends StatelessWidget {
           subText: "Nom, prénom, date de naissance, ...",
           suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
           redirect: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileInfoDetails()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileInfoDetails()));
         }),
       ),
     );

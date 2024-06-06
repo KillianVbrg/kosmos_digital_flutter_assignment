@@ -18,11 +18,11 @@ class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StyledHeadlineMedium("Infos personnelles"),
+        title: const StyledHeadlineMedium("Infos personnelles"),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child: Column(
           children: [
             StyledTextField(
@@ -31,7 +31,7 @@ class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
               isHidden: false,
               controller: firstName,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             StyledTextField(
@@ -40,17 +40,17 @@ class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
               isHidden: false,
               controller: lastName,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             StyledButton(
               () => {},
-              StyledTitleSmall("Enregistrer") ,
+              const StyledTitleSmall("Enregistrer") ,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
+            const StyledBodyMedium(text: "*Les champs marqués sont obligatoires", centered: true,),
           ],
         ),
       ),

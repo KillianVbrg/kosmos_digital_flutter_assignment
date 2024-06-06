@@ -29,7 +29,7 @@ class _FeedState extends State<Feed> {
     showSuccess = widget.previousRoute == "posting" ? true : false;
 
     if(showSuccess){
-      new Future.delayed(const Duration(seconds: 3), (){
+      Future.delayed(const Duration(seconds: 3), (){
         if(mounted){
           setState(() {
             showSuccess = false;
@@ -53,10 +53,10 @@ class _FeedState extends State<Feed> {
           unselectedItemColor: AppColors.primaryColor.withOpacity(0.5),
           onTap: (index){
             if(index == 1){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileOverview()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileOverview()));
             }
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
                 label: "",
@@ -78,13 +78,13 @@ class _FeedState extends State<Feed> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 5 ),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Color.fromRGBO(52, 230, 148, 1),
                   ),
                   width: double.infinity,
                   height: 100,
-                  child: Column(
+                  child: const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       StyledTitleMedium("Post publié !"),
@@ -95,14 +95,14 @@ class _FeedState extends State<Feed> {
               ),
             if(!showSuccess)
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 30, 30, 5),
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             StyledHeadlineSmall(
@@ -114,15 +114,15 @@ class _FeedState extends State<Feed> {
                         ),
                         GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileOverview()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileOverview()));
                           },
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             backgroundImage: AssetImage("assets/profile_placeholder_2.png"),
                           ),
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       height: 25,
                       color: Colors.black,
                     ),
@@ -145,7 +145,7 @@ class _FeedState extends State<Feed> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Expanded(
@@ -156,7 +156,7 @@ class _FeedState extends State<Feed> {
                       return ListView.builder(
                         itemCount: value.posts.length,
                         itemBuilder: (_, index){
-                          return Post(user: value.posts[index].authorId, imagePath: value.posts[index].image);
+                          return Post(date: value.posts[index].date, imagePath: value.posts[index].image, description: value.posts[index].description);
                         },
                       );
                     },
@@ -166,7 +166,7 @@ class _FeedState extends State<Feed> {
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.add_circle_rounded,
                           size: 75,
                           color: Colors.white,
@@ -174,7 +174,7 @@ class _FeedState extends State<Feed> {
                         onPressed: (){
                           Navigator.push(
                             context, MaterialPageRoute(
-                              builder: (context) => PostImageSelector(),
+                              builder: (context) => const PostImageSelector(),
                             ),
                           );
                         },

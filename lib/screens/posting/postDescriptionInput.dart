@@ -5,6 +5,7 @@ import 'package:assignment/screens/feed/feed.dart';
 import 'package:assignment/services/firestore/post_store.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/texts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,15 +39,16 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
     }
 
 
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     Provider.of<PostStore>(context, listen: false).addPost(Post(
         id: uuid.v4(),
         image: imageUrl,
         description: descriptionController.text.trim(),
         date: DateTime.now(),
-        authorId: "12345uid"),
+        authorId: userId),
     );
 
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Feed(previousRoute: "posting",)), (route) => false);
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const Feed(previousRoute: "posting",)), (route) => false);
   }
 
   @override
@@ -54,12 +56,12 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30, 10, 30, 30),
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            StyledHeadlineLarge(text: "Ajoutez une description", centered: false),
-            SizedBox(
+            const StyledHeadlineLarge(text: "Ajoutez une description", centered: false),
+            const SizedBox(
               height: 20,
             ),
             Expanded(
@@ -69,7 +71,7 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 5,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ]
                 ),
@@ -85,7 +87,7 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ValueListenableBuilder(
@@ -93,8 +95,8 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
               builder: (context, value, widget) {
 
                 return StyledButton(
-                  descriptionController.text.trim().length == 0? null : handleSubmit,
-                  StyledTitleSmall("Publier"),
+                  descriptionController.text.trim().isEmpty? null : handleSubmit,
+                  const StyledTitleSmall("Publier"),
                 );
               }
             ),
