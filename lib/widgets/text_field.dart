@@ -30,7 +30,7 @@ class StyledTextField extends StatelessWidget {
                 ),
               ]
           ),
-          child: TextFormField(
+          child: TextField(
             controller: controller,
             obscureText: isHidden,
             keyboardType: TextInputType.emailAddress,

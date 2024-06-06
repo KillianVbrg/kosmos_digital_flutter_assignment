@@ -33,7 +33,6 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
       await reference.putFile(File(widget.selectedImage.path));
 
       imageUrl = await reference.getDownloadURL();
-      print(imageUrl);
     } catch(error){
       print(error);
     }
@@ -47,13 +46,11 @@ class _PostDescriptionInputState extends State<PostDescriptionInput> {
         authorId: "12345uid"),
     );
 
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Feed()), (route) => false);
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Feed(previousRoute: "posting",)), (route) => false);
   }
 
   @override
   Widget build(BuildContext context) {
-    print(descriptionController.text.trim().length);
-
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

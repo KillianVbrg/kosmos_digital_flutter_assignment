@@ -18,12 +18,14 @@ class PostStore extends ChangeNotifier {
 
   // initial fetch
   void fetchPosts() async {
-    final snapshot = await PostService.getPosts();
+    if(_posts.isEmpty){
+      final snapshot = await PostService.getPosts();
 
-    for(var doc in snapshot.docs){
-      _posts.add(doc.data());
+      for(var doc in snapshot.docs){
+        _posts.add(doc.data());
+      }
+
+      notifyListeners();
     }
-
-    notifyListeners();
   }
 }

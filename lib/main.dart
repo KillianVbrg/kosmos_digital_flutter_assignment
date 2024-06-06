@@ -4,6 +4,7 @@ import 'package:assignment/services/firestore/post_store.dart';
 import 'package:assignment/theme.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/texts.dart';
+import 'package:assignment/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ void main() async {
       theme: primaryTheme,
       home: Scaffold(
         body: SafeArea(
-          child: Landing(),
+          child: Wrapper(),
         ),
       ),
     ),

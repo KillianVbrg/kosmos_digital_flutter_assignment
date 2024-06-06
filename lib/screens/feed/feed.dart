@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Feed extends StatefulWidget {
-  const Feed({super.key});
+  const Feed({super.key, this.previousRoute});
+
+  final String? previousRoute;
 
   @override
   State<Feed> createState() => _FeedState();
@@ -17,17 +19,22 @@ class Feed extends StatefulWidget {
 class _FeedState extends State<Feed> {
   final user = "Anna Clark";
   final post = "assets/picture_placeholder_1.png";
-  var showSuccess = true;
+
+  late bool showSuccess;
 
   @override
   void initState() {
     Provider.of<PostStore>(context, listen: false).fetchPosts();
 
+    showSuccess = widget.previousRoute == "posting" ? true : false;
+
     if(showSuccess){
       new Future.delayed(const Duration(seconds: 3), (){
-        setState(() {
-          showSuccess = false;
-        });
+        if(mounted){
+          setState(() {
+            showSuccess = false;
+          });
+        }
       });
     }
 
@@ -69,7 +76,7 @@ class _FeedState extends State<Feed> {
           children: [
             if(showSuccess)
               Padding(
-                padding: const EdgeInsets.fromLTRB(40, 40, 40, 10),
+                padding: const EdgeInsets.fromLTRB(30, 30, 30, 5 ),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),

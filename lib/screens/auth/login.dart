@@ -1,4 +1,6 @@
 import 'package:assignment/constants/colors.dart';
+import 'package:assignment/screens/feed/feed.dart';
+import 'package:assignment/services/auth/auth_service.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/text_field.dart';
 import 'package:assignment/widgets/texts.dart';
@@ -18,6 +20,8 @@ class _LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController emailResetPasswordController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  String? _errorFeedback;
 
   @override
   void dispose() {
@@ -88,7 +92,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             showDragHandle: true,
-        
+
                             backgroundColor: Colors.white,
                             builder: (context) => Container(
                               padding: EdgeInsets.all(25),
@@ -122,7 +126,7 @@ class _LoginState extends State<Login> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                
+
                                                 title: Column(
                                                   children: [
                                                     Align(
@@ -177,8 +181,46 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 30,
                   ),
+                  if(_errorFeedback != null)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(_errorFeedback!, style: TextStyle(color: Colors.red),),
+                        SizedBox(
+                          height: 5,
+                          width: double.infinity,
+                        ),
+                      ],
+                    ),
                   StyledButton(
-                    () => {},
+                    () async {
+                      final email = emailController.text.trim();
+                      final password = passwordController.text;
+                      final isEmailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(email);
+                      if(isEmailValid && password.length > 7){
+                        setState(() {
+                          _errorFeedback = null;
+                        });
+
+                        final email = emailController.text.trim();
+                        final password = passwordController.text;
+
+                        final user = await AuthService.signIn(email, password);
+
+                        if(user == null){
+                          setState(() {
+                            _errorFeedback = "L'adresse mail ou le mot de passe est incorrect";
+                          });
+                        } else {
+                          Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => Feed()), (route) => false);
+                        }
+                      } else {
+                        setState(() {
+                          _errorFeedback = "L'adresse mail ou le mot de passe (au moins 8 charactères) est incorrect";
+                        });
+                      }
+                    },
                     StyledTitleSmall("Connexion"),
                   ),
                 ],

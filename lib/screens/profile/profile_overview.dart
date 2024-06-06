@@ -4,6 +4,7 @@ import 'package:assignment/constants/colors.dart';
 import 'package:assignment/screens/placeholder_screen.dart';
 import 'package:assignment/screens/profile/info/profile_modify_info.dart';
 import 'package:assignment/screens/profile/security/profile_security.dart';
+import 'package:assignment/services/auth/auth_service.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/profile_tile.dart';
 import 'package:assignment/widgets/texts.dart';
@@ -37,7 +38,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     title: StyledBodySmall("Que souhaitez vous faire ?"),
                     actions: [
                       CupertinoActionSheetAction(
-                        onPressed: (){},
+                        onPressed: (){
+                          AuthService.signOut();
+                        },
                         child: Text("Se déconnecter", style: TextStyle(color: Colors.red),),
                       ),
                       CupertinoActionSheetAction(
