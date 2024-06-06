@@ -10,7 +10,6 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();
-    print(firebaseUser);
 
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),

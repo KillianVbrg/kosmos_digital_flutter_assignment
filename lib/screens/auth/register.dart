@@ -194,8 +194,8 @@ class _RegisterState extends State<Register> {
                                                           const StyledHeadlineLarge(text: "Vérifiez votre boite mail", centered: true, ),
                                                         ],
                                                       ),
-                                                      content: const StyledHeadlineSmall(
-                                                        text: "Un mail de vérification vous a été envoyé à l'adresse dummy@gmail.com}",
+                                                      content: StyledHeadlineSmall(
+                                                        text: "Un mail de vérification vous a été envoyé à l'adresse ${emailController.text.trim()}",
                                                         centered: true,
                                                       ),
                                                       actions: [

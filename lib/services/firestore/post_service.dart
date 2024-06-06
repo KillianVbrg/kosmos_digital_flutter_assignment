@@ -19,6 +19,6 @@ class PostService{
 
   // get
   static Future<QuerySnapshot<Post>> getPosts(){
-    return postRef.get();
+    return postRef.orderBy("date", descending: true).get();
   }
 }

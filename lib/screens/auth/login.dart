@@ -1,4 +1,5 @@
 import 'package:assignment/constants/colors.dart';
+import 'package:assignment/screens/auth/onboarding.dart';
 import 'package:assignment/screens/feed/feed.dart';
 import 'package:assignment/services/auth/auth_service.dart';
 import 'package:assignment/services/firestore/user_info_store.dart';
@@ -215,7 +216,11 @@ class _LoginState extends State<Login> {
                           });
                         } else {
                           Provider.of<UserInfoStore>(context, listen: false).fetchUserInfo(user.uid);
-                          Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => const Feed()), (route) => false);
+                          if(Provider.of<UserInfoStore>(context, listen: false).userInfo[0].image == ""){
+                            Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => const Onboarding()), (route) => false);
+                          } else {
+                            Navigator.pushAndRemoveUntil(context,  MaterialPageRoute(builder: (context) => const Feed()), (route) => false);
+                          }
                         }
                       } else {
                         setState(() {

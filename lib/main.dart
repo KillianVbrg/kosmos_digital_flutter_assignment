@@ -33,38 +33,3 @@ void main() async {
     ),
   ));
 }
-
-class Sandbox extends StatelessWidget {
-  const Sandbox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Test"),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-
-        color: Colors.grey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const StyledBodySmall("Small body"),
-            const StyledBodyMedium(text: "Medium body", centered: true,),
-            const StyledHeadlineSmall(text: "Small headline", centered: true,),
-            const StyledHeadlineMedium("Medium headline"),
-            const StyledHeadlineLarge(text: "Large headline", centered: true,),
-            const StyledTitleSmall("Small title"),
-            const StyledTitleMedium("Medium title"),
-            const StyledTitleLarge("Large title"),
-            StyledButton(
-                  () {},
-              const StyledTitleSmall("Test"),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

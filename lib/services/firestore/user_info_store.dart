@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 
 class UserInfoStore extends ChangeNotifier {
   late List<UserInfo> _userInfo = [];
-  late List<UserInfo> _postUserInfo = [];
 
   get userInfo => _userInfo;
-  get postUserInfo => _postUserInfo;
 
   // add
   void setUserInfo(UserInfo userInfo){
@@ -37,20 +35,5 @@ class UserInfoStore extends ChangeNotifier {
     setUserInfo(userInfo);
 
     UserInfoService.updateUserInfo(userInfo);
-  }
-
-
-
-  // post user info fetch
-  void fetchPostUserInfo(String uid) async {
-    final snapshot = await UserInfoService.getPostUserInfo(uid);
-
-    _postUserInfo = [];
-
-    for(var doc in snapshot.docs){
-      _postUserInfo.add(doc.data());
-    }
-
-    notifyListeners();
   }
 }

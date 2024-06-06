@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:assignment/widgets/texts.dart';
 
 class StyledTextField extends StatelessWidget {
-  const StyledTextField({required this.label, required this.hint, required this.isHidden, this.prefixIcon, this.suffixIcon, required this.controller, super.key});
+  const StyledTextField({this.defaultValue, required this.label, required this.hint, required this.isHidden, this.prefixIcon, this.suffixIcon, required this.controller, super.key});
 
+  final String? defaultValue;
   final String label;
   final String hint;
   final bool isHidden;

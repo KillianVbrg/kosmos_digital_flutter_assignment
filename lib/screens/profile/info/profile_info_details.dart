@@ -1,7 +1,12 @@
+import 'package:assignment/screens/feed/feed.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/button.dart';
+import 'package:assignment/models/user_info.dart' as UserInfoModel;
 import 'package:assignment/widgets/text_field.dart';
 import 'package:assignment/widgets/texts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileInfoDetails extends StatefulWidget {
   const ProfileInfoDetails({super.key});
@@ -11,11 +16,12 @@ class ProfileInfoDetails extends StatefulWidget {
 }
 
 class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
-  final TextEditingController firstName = TextEditingController();
-  final TextEditingController lastName = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    var userInfoProvider = Provider.of<UserInfoStore>(context, listen: false).userInfo[0];
+    final TextEditingController firstNameController = TextEditingController(text: userInfoProvider.firstName);
+    final TextEditingController lastNameController = TextEditingController(text: userInfoProvider.lastName);
+
     return Scaffold(
       appBar: AppBar(
         title: const StyledHeadlineMedium("Infos personnelles"),
@@ -29,7 +35,7 @@ class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
               label: "Prénom*",
               hint: "John",
               isHidden: false,
-              controller: firstName,
+              controller: firstNameController,
             ),
             const SizedBox(
               height: 15,
@@ -38,13 +44,19 @@ class _ProfileInfoDetailsState extends State<ProfileInfoDetails> {
               label: "Nom*",
               hint: "Doe",
               isHidden: false,
-              controller: lastName,
+              controller: lastNameController,
             ),
             const SizedBox(
               height: 20,
             ),
             StyledButton(
-              () => {},
+              () {
+                if(firstNameController.text.trim().length > 1 && lastNameController.text.trim().length > 1){
+                  Provider.of<UserInfoStore>(context, listen: false).updateUserInfo(UserInfoModel.UserInfo(id: userInfoProvider.id, userId: FirebaseAuth.instance.currentUser!.uid, firstName: firstNameController.text.trim(), lastName: lastNameController.text.trim(), datePasswordUpdate: userInfoProvider.datePasswordUpdate, image: userInfoProvider.image, notification: userInfoProvider.notification));
+
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => Feed()), (route) => false);
+                }
+              },
               const StyledTitleSmall("Enregistrer") ,
             ),
             const SizedBox(

@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
-  const Details({required this.user, required this.imagePath, super.key});
+  const Details({required this.userFullName, required this.imagePath, required this.timeAgo, required this.description, required this.userImage, super.key});
 
-  final String user;
+  final String description;
+  final String timeAgo;
+  final String userFullName;
+  final String userImage;
   final String imagePath;
 
   @override
@@ -22,8 +25,8 @@ class _DetailsState extends State<Details> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(widget.imagePath),
-                fit: BoxFit.fitWidth,
+                image: NetworkImage(widget.imagePath),
+                fit: BoxFit.fitHeight,
               ),
             ),
             child: Column(
@@ -107,13 +110,13 @@ class _DetailsState extends State<Details> {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [AppColors.primaryColor.withOpacity(0.75), Colors.transparent], begin: Alignment.centerRight, end: Alignment.centerLeft)
                   ),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.all(30),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage("assets/profile_placeholder_1.png"),
+                          backgroundImage: NetworkImage(widget.userImage),
                         ),
                         SizedBox(
                           width: 15,
@@ -126,14 +129,14 @@ class _DetailsState extends State<Details> {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                StyledTitleSmall("User's name"),
+                                StyledTitleSmall("${widget.userFullName}"),
                                 SizedBox(
                                   width: 10,
                                 ),
-                                StyledBodySmall("22 min"),
+                                StyledBodySmall("${widget.timeAgo}"),
                               ],
                             ),
-                            // StyledBodySmall("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed est tortor, maximus sed enim id, lacinia malesuada mauris. Suspendisse pharetra nulla feugiat, pellentesque nulla in, ornare turpis. Nunc sodales tristique fringilla. Maecenas facilisis orci eget libero iaculis, vitae eleifend nulla aliquam. Cras neque felis, semper id eros vestibulum, elementum congue ante. Nam egestas, eros nec pretium pretium, lectus nunc porta nibh, eget gravida nisi magna in eros. Aenean non turpis et lorem rhoncus aliquet. Fusce condimentum fringilla neque, sit amet sodales velit molestie ac. Praesent vitae ipsum efficitur, pulvinar dui et, rhoncus orci. Curabitur id arcu est. Morbi congue odio sit amet faucibus consectetur. Suspendisse sapien erat, convallis viverra metus ac, condimentum facilisis urna. Morbi a metus sit amet velit fringilla ullamcorper nec vitae elit.")
+                            StyledBodySmall("${widget.description}")
                           ],
                         ),
                       ],

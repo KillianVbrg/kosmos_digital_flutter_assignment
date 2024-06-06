@@ -23,11 +23,6 @@ class UserInfoService{
   }
 
 
-  static Future<QuerySnapshot<UserInfo>> getPostUserInfo(String uid){
-    return userInfoRef.where('userId', isEqualTo: uid).get();
-  }
-
-
   // update
   static Future<void> updateUserInfo(UserInfo userInfo) async {
     print(userInfo.id);

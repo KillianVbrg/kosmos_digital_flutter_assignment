@@ -11,7 +11,9 @@ class AuthService{
     try{
       final UserCredential credential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
+
       if(credential.user != null){
+        await credential.user!.sendEmailVerification();
         return AppUser(
           uid: credential.user!.uid,
           email: credential.user!.email!,

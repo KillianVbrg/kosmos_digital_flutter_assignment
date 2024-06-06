@@ -9,8 +9,10 @@ import 'package:timeago/timeago.dart' as timeago;
 
 
 class Post extends StatefulWidget {
-  const Post({required this.date, required this.imagePath, required this.description, super.key});
+  const Post({required this.authorFullName, required this.authorPicture, required this.date, required this.imagePath, required this.description, super.key});
 
+  final String authorFullName;
+  final String authorPicture;
   final DateTime date;
   final String imagePath;
   final String description;
@@ -35,9 +37,12 @@ class _PostState extends State<Post> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Details(
-                  user: "Killian",
-                  imagePath: "assets/picture_placeholder_2.png",
+                builder: (context) => Details(
+                  userFullName: "${Provider.of<UserInfoStore>(context).userInfo[0].firstName + " " + Provider.of<UserInfoStore>(context).userInfo[0].lastName}",
+                  imagePath: widget.imagePath,
+                  timeAgo: timeAgo,
+                  description: widget.description,
+                  userImage: Provider.of<UserInfoStore>(context).userInfo[0].image
                 ),
               ),
             );

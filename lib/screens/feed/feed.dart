@@ -2,6 +2,7 @@ import 'package:assignment/constants/colors.dart';
 import 'package:assignment/screens/posting/postImageSelector.dart';
 import 'package:assignment/screens/profile/profile_overview.dart';
 import 'package:assignment/services/firestore/post_store.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/post.dart';
 import 'package:assignment/widgets/texts.dart';
 import 'package:flutter/material.dart';
@@ -102,11 +103,11 @@ class _FeedState extends State<Feed> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Column(
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             StyledHeadlineSmall(
-                              text: "Bonjour, Anna 👋🏻",
+                              text: "Bonjour, ${Provider.of<UserInfoStore>(context).userInfo[0].firstName} 👋🏻",
                               centered: false,
                             ),
                             StyledTitleLarge("Fil d'actualités"),
@@ -116,8 +117,8 @@ class _FeedState extends State<Feed> {
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileOverview()));
                           },
-                          child: const CircleAvatar(
-                            backgroundImage: AssetImage("assets/profile_placeholder_2.png"),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(Provider.of<UserInfoStore>(context).userInfo[0].image),
                           ),
                         ),
                       ],
@@ -156,7 +157,7 @@ class _FeedState extends State<Feed> {
                       return ListView.builder(
                         itemCount: value.posts.length,
                         itemBuilder: (_, index){
-                          return Post(date: value.posts[index].date, imagePath: value.posts[index].image, description: value.posts[index].description);
+                          return Post(authorFullName: "", authorPicture: "", date: value.posts[index].date, imagePath: value.posts[index].image, description: value.posts[index].description);
                         },
                       );
                     },

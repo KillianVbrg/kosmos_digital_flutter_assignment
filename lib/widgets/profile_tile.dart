@@ -40,7 +40,7 @@ class _ProfileTileState extends State<ProfileTile> {
                         shape: BoxShape.circle,
                         color: (widget.prefix is String) ? Colors.transparent : AppColors.primaryColor
                     ),
-                    child: widget.prefix is String ? CircleAvatar(backgroundImage: AssetImage(widget.prefix),) : Icon(widget.prefix, color: Colors.white, size: 20,)
+                    child: widget.prefix is String ? widget.prefix.contains("http") ? CircleAvatar(backgroundImage: NetworkImage(widget.prefix),) : CircleAvatar(backgroundImage: AssetImage(widget.prefix),) : Icon(widget.prefix, color: Colors.white, size: 20,)
                 ),
                 const SizedBox(
                   width: 15,

@@ -1,16 +1,20 @@
 import 'dart:io';
 
 import 'package:assignment/constants/colors.dart';
+import 'package:assignment/models/user_info.dart' as UserInfoModel;
 import 'package:assignment/screens/placeholder_screen.dart';
 import 'package:assignment/screens/profile/info/profile_modify_info.dart';
 import 'package:assignment/screens/profile/security/profile_security.dart';
 import 'package:assignment/services/auth/auth_service.dart';
+import 'package:assignment/services/firestore/user_info_store.dart';
 import 'package:assignment/widgets/button.dart';
 import 'package:assignment/widgets/profile_tile.dart';
 import 'package:assignment/widgets/texts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileOverview extends StatefulWidget {
@@ -26,6 +30,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
 
   @override
   Widget build(BuildContext context) {
+    var userInfoProvider = Provider.of<UserInfoStore>(context, listen: false).userInfo[0];
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -123,9 +129,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                       Container(
                         height: 100,
                         width: 100,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: DecorationImage(image: AssetImage("assets/profile_placeholder_2.png"), fit: BoxFit.fill)
+                          image: DecorationImage(image: NetworkImage(userInfoProvider.image), fit: BoxFit.fill)
                         ),
                       ),
                       const SizedBox(
@@ -199,8 +205,8 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   ),
                 ]
               ),
-              const StyledHeadlineLarge(text: "Anna Clark", centered: true),
-              const StyledHeadlineSmall(text: "emial@gmail.com", centered: true),
+              StyledHeadlineLarge(text: "${userInfoProvider.firstName + " " + userInfoProvider.lastName}", centered: true),
+              StyledHeadlineSmall(text: "${FirebaseAuth.instance.currentUser!.email}", centered: true),
               Divider(color: Colors.grey[300]),
               const SizedBox(
                 height: 15,
@@ -211,9 +217,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                 children: [
                   const StyledHeadlineMedium("Mon compte"),
                   ProfileTile(
-                    prefix: "assets/profile_placeholder_2.png",
-                    text: "Anna Clark",
-                    subText: "email@gamil.co",
+                    prefix: userInfoProvider.image,
+                    text: "${userInfoProvider.firstName + " " + userInfoProvider.lastName}",
+                    subText: "${FirebaseAuth.instance.currentUser!.email}",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
                     redirect: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileModifyInfo()));
@@ -236,13 +242,13 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                   ProfileTile(
                     prefix: Icons.notifications_none_rounded,
                     text: "Notifications push",
-                    subText: "Activés",
+                    subText: userInfoProvider.notification ? "Activés" : "Désactivés",
                     suffix: Switch.adaptive(
-                      value: isSwitched,
+                      value: userInfoProvider.notification,
                       activeTrackColor: AppColors.primaryColor,
                       onChanged: (value) {
                         setState(() {
-                          isSwitched = value;
+                          Provider.of<UserInfoStore>(context, listen: false).updateUserInfo(UserInfoModel.UserInfo(id: userInfoProvider.id, userId: FirebaseAuth.instance.currentUser!.uid, firstName: userInfoProvider.firstName, lastName: userInfoProvider.lastName, datePasswordUpdate: userInfoProvider.datePasswordUpdate, image: userInfoProvider.image, notification: value));
                         });
                       }
                     ),
@@ -258,8 +264,9 @@ class _ProfileOverviewState extends State<ProfileOverview> {
                     text: "Aide",
                     subText: "Contactez-nous en partageant l'app",
                     suffix: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey[400], size: 20,),
-                    redirect: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const PlaceholderScreen()));
+                    redirect: () async {
+                      final url = Uri.parse("https://www.youtube.com/watch?v=l60MnDJklnM");
+                      await launchUrl(url);
                     },
                   ),
                   ProfileTile(
